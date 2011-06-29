@@ -18,7 +18,7 @@ def dashboard(request):
     ctx = {
         "email_lists": email_lists.keys(),
     }
-    return render(request, "user_mailer/dashboard.html", ctx)
+    return render(request, "mailout/dashboard.html", ctx)
 
 
 @staff_member_required
@@ -37,7 +37,7 @@ def campaign_create(request):
         "form": form,
     }
     ctx = RequestContext(request, ctx)
-    return render_to_response("user_mailer/campaign_create.html", ctx)
+    return render_to_response("mailout/campaign_create.html", ctx)
 
 
 @staff_member_required
@@ -47,7 +47,7 @@ def campaign_review(request, pk):
         "campaign": campaign,
     }
     ctx = RequestContext(request, ctx)
-    return render_to_response("user_mailer/campaign_review.html", ctx)
+    return render_to_response("mailout/campaign_review.html", ctx)
 
 
 @staff_member_required
@@ -88,7 +88,7 @@ def campaign_email_preview(request, pk, email):
         "body": campaign.email_template.render_body(email_ctx),
     }
     ctx = RequestContext(request, ctx)
-    return render_to_response("user_mailer/_campaign_email_preview.html", ctx)
+    return render_to_response("mailout/_campaign_email_preview.html", ctx)
 
 
 @staff_member_required
@@ -102,7 +102,7 @@ def email_list_detail(request, label):
         "email_list": list(email_list_func()),
         "campaigns": Campaign.objects.filter(email_list=label),
     }
-    return render(request, "user_mailer/email_list_detail.html", ctx)
+    return render(request, "mailout/email_list_detail.html", ctx)
 
 
 @staff_member_required
@@ -111,4 +111,4 @@ def campaign_detail(request, pk):
     ctx = {
         "campaign": campaign,
     }
-    return render(request, "user_mailer/campaign_detail.html", ctx)
+    return render(request, "mailout/campaign_detail.html", ctx)
