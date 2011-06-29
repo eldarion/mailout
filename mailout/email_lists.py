@@ -13,7 +13,7 @@ class EmailListDict(object):
         self._lists = {}
         for mp in settings.MAILOUT_MODULES:
             i = mp.rfind(".")
-            path, module = path[:i], path[i+1:]
+            path, module = mp[:i], mp[i+1:]
             m = import_module(mp)
             self._lists[module] = {
                 "list": m.email_list,
@@ -27,6 +27,14 @@ class EmailListDict(object):
     def keys(self):
         self._load()
         return self._lists.keys()
+    
+    def choices(self):
+        self._load()
+        for k, v in self._lists.iteritems():
+            yield (k, k)
 
 
+# NOTE: while EmailListDict is lazy, mailout will force evaluation during
+# importing models.py which means weird side-effects can occur if user mailout
+# modules are setup poorly.
 email_lists = EmailListDict()

@@ -35,7 +35,7 @@ class Campaign(models.Model):
     
     from_address = models.CharField(max_length=150)
     email_template = models.ForeignKey(EmailTemplate)
-    email_list = models.CharField(max_length=50)
+    email_list = models.CharField(max_length=50, choices=email_lists.choices())
     created = models.DateTimeField(default=datetime.datetime.now)
     sent = models.DateTimeField(null=True)
     
