@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = "mailout",
-    version = "1.0a1.dev1",
+    version = "1.0a1.dev2",
     author = "Eldarion",
     author_email = "development@eldarion.com",
     description = "templated mail campaigns based on customizable queries",
